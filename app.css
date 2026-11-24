@@ -1,0 +1,72 @@
+/* data-terminal tokens (design-taste-frontend). Accent is only ever a 1px line / small mark. */
+:root {
+  --ground: #171719; --surface: #131217; --raised: #212023; --rule: #222224; --control: #3a3a3e;
+  --text: #ffffff; --muted: #8a8c92; --accent: #4a8ad6;
+  --ok: #44a282; --low: #d9a441; --out: #e5566f;
+  --radius: 6px;
+  --font: "Public Sans", Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--ground); color: var(--text); font: 13px/1.5 var(--font); }
+body { min-height: 100vh; display: flex; flex-direction: column; }
+
+.top { display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  padding: 12px 24px; background: var(--surface); border-bottom: 1px solid var(--rule); }
+.brand { display: flex; align-items: center; gap: 10px; }
+.mark { width: 14px; height: 14px; border-radius: 4px; background: var(--accent); }
+.name { font-weight: 700; font-size: 15px; }
+.sub { color: var(--muted); font-size: 13px; }
+.status { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 12px; }
+.dot { width: 7px; height: 7px; border-radius: 50%; background: var(--muted); }
+.dot.live { background: var(--ok); }
+.dot.stale { background: var(--out); }
+#refresh { background: none; border: 1px solid var(--control); color: var(--text); border-radius: 999px;
+  width: 28px; height: 28px; cursor: pointer; font-size: 14px; line-height: 1; }
+#refresh:hover { border-color: var(--accent); }
+
+main { width: 100%; max-width: 1120px; margin: 0 auto; padding: 24px; flex: 1; }
+.lede { margin: 0 0 18px; color: var(--muted); }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+.card { background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius); padding: 16px 18px 14px; }
+.card.off { opacity: .8; }
+.card-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 14px; }
+.card-name { font-size: 15px; font-weight: 600; }
+.card-plan { color: var(--muted); font-size: 11px; text-transform: capitalize; }
+.win { margin-bottom: 14px; }
+.win-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 5px; }
+.win-label { color: var(--muted); font-size: 12px; }
+.pct { font-size: 24px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.pct.ok { color: var(--ok); } .pct.low { color: var(--low); } .pct.out { color: var(--out); }
+.pct.na { color: var(--muted); font-size: 15px; }
+.bar { height: 8px; border-radius: 3px; background: var(--rule); overflow: hidden; }
+.bar > i { display: block; height: 100%; border-radius: 3px; }
+.bar > i.ok { background: var(--ok); } .bar > i.low { background: var(--low); } .bar > i.out { background: var(--out); }
+.reset { margin-top: 5px; color: var(--muted); font-size: 11px; }
+.credits { display: flex; justify-content: space-between; border-top: 1px solid var(--rule); padding-top: 10px; font-size: 12px; }
+.credits span { color: var(--muted); }
+.err { color: var(--muted); font-size: 12px; line-height: 1.55; }
+.err b { color: var(--low); font-weight: 600; }
+.empty { color: var(--muted); padding: 20px 0; }
+
+footer { padding: 14px 24px; border-top: 1px solid var(--rule); color: var(--muted); font-size: 11px; text-align: center; }
+
+@media (max-width: 560px) {
+  .top { padding: 10px 14px; flex-wrap: wrap; } main { padding: 16px 14px; }
+  .grid { grid-template-columns: 1fr; }
+}
+
+.notes { margin: 0 0 4px; padding: 0; list-style: none; }
+.notes li { color: var(--muted); font-size: 12px; line-height: 1.5; padding: 3px 0 3px 12px; position: relative; }
+.notes li::before { content: ""; position: absolute; left: 0; top: 10px; width: 4px; height: 4px; border-radius: 50%; background: var(--control); }
+.credits { margin-top: 8px; }
+
+/* per-model table (Gemini card) */
+.models { margin: 4px 0 8px; border-top: 1px solid var(--rule); padding-top: 8px; }
+.models summary { cursor: pointer; color: var(--muted); font-size: 12px; }
+.tbl-wrap { max-height: 320px; overflow: auto; margin-top: 8px; }
+.models table { width: 100%; border-collapse: collapse; font-size: 11.5px; }
+.models th { position: sticky; top: 0; background: var(--surface); color: var(--muted); text-align: left; font-weight: 500; padding: 4px 6px; }
+.models td { padding: 4px 6px; border-top: 1px solid var(--rule); color: var(--muted); white-space: nowrap; }
+.models td:first-child { color: #fff; white-space: normal; }
+.models tr.used td { color: #fff; }

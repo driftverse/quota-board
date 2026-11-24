@@ -1,0 +1,9 @@
+[Unit]
+Description=Quota board: read AI Studio Gemini rate limits into the cache (optional)
+
+[Service]
+Type=oneshot
+Environment=AISTUDIO_PROJECT=your-project-id
+ExecStart=/usr/bin/python3 %h/quota-board/gemini_studio.py
+TimeoutStartSec=120
+Nice=10

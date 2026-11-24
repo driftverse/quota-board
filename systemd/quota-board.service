@@ -1,0 +1,19 @@
+[Unit]
+Description=Quota board (read-only subscription quota page)
+After=network.target
+
+[Service]
+Type=simple
+# Adjust the install path. Set QUOTA_* / AISTUDIO_* variables here (see README).
+ExecStart=/usr/bin/python3 %h/quota-board/daemon.py
+Environment=QUOTA_TZ=UTC
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=yes
+ProtectSystem=strict
+# Only paths the helpers need to write (agy / codex refresh their own state). Missing ones are ignored.
+ReadWritePaths=-%h/.hermes -%h/.gemini -%h/.codex -%h/.cache/quota-board
+MemoryMax=400M
+
+[Install]
+WantedBy=default.target
